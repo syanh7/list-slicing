@@ -16,9 +16,12 @@ def custom_len(input_list):
 
     """
     list_length = 0
+    ##set length
 
     for ele in input_list:
         list_length += 1
+    ##add 1 to list_length each time
+    ##we iterate through
 
     return list_length
 
@@ -51,6 +54,7 @@ def custom_append(input_list, value):
     ##grabs the list length to know at where the value should be appended
 
     input_list[list_length:] = [value]
+    ##insert value at slice of list_length, which is the end of the list
     ##value is not a list, so we had to put in a list so it doesnt iterate over it 
 
     pass
@@ -72,7 +76,9 @@ def custom_extend(input_list, second_list):
 
     """
     list_length = custom_len(input_list)
+
     input_list[list_length:] = second_list
+    #put the second list at the end of the first list using slicing and list len
     #since second_list is already a list, we don't have to put it in a list
 
     pass
@@ -167,11 +173,16 @@ def custom_index(input_list, value):
 
     """
     length = custom_len(input_list)
+    #find the length of the list
+
     for i in range(length):
+    #Iterate through the list 
         if input_list[i] == value:
             return i
+            #if we find the value in the list, we
+            #return the list index
 
-    return 0
+    return None
 
 
 def custom_count(input_list, value):
@@ -193,6 +204,8 @@ def custom_count(input_list, value):
     for ele in input_list:
         if ele == value:
             total += 1
+            ##increments the total when there
+            ##is a match of the value in the list
 
     return total
 
@@ -213,6 +226,8 @@ def custom_reverse(input_list):
 
     """
     input_list[:] = input_list[::-1]
+    ##replaces a slice of the whole list
+    ##with the reverse of the list
 
     pass
 
@@ -237,8 +252,12 @@ def custom_contains(input_list, value):
     for ele in input_list:
         if ele == value:
             return True
+            ##if the list item is equal to 
+            ##value, return true
 
-
+    #If you break out of the loop,
+    ##then there were no matches,
+    ##returns false
     return False
 
 
@@ -259,11 +278,15 @@ def custom_equality(some_list, another_list):
     """
 
     length = custom_len(some_list)
+    #find the length of the list
 
     for i in range(length):
         if some_list[i] != another_list[i]:
+        ##compapre the lists at the same index, if they
+        ##are not the same, return false
             return False
 
+    #if you break out of loop w/o return false, then its true
     return True
 
 
@@ -275,4 +298,6 @@ if __name__ == '__main__':
     result = doctest.testmod()
     if result.failed == 0:
         print('ALL TESTS PASSED')
+
+##HI CHARLOTTE
 
