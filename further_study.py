@@ -15,8 +15,12 @@ def custom_len(input_list):
         8
 
     """
+    list_length = 0
 
-    return 0
+    for ele in input_list:
+        list_length += 1
+
+    return list_length
 
 
 # For the next four exercises, you'll need to be clever and think about ways
@@ -43,6 +47,11 @@ def custom_append(input_list, value):
         True
 
     """
+    list_length = custom_len(input_list)
+    ##grabs the list length to know at where the value should be appended
+
+    input_list[list_length:] = [value]
+    ##value is not a list, so we had to put in a list so it doesnt iterate over it 
 
     pass
 
@@ -62,6 +71,9 @@ def custom_extend(input_list, second_list):
         True
 
     """
+    list_length = custom_len(input_list)
+    input_list[list_length:] = second_list
+    #since second_list is already a list, we don't have to put it in a list
 
     pass
 
@@ -80,6 +92,15 @@ def custom_insert(input_list, index, value):
         True
 
     """
+    list_end = input_list[index:]
+    #get the last part of the list after the index and
+    #stores in a new list
+
+    input_list[index:] = [value]
+    #We replace the list after the index with value
+
+    input_list[index + 1:] = list_end
+    #we add back the end of the list
 
     pass
 
@@ -99,6 +120,12 @@ def custom_remove(input_list, value):
         True
 
     """
+    index = custom_index(input_list, value)
+    #grabs index at value
+
+    input_list[index:] = input_list[index + 1:]
+    #replaces list after and including index, with list after index
+
 
     pass
 
@@ -118,8 +145,13 @@ def custom_pop(input_list):
         ['Jan', 'Feb']
 
     """
+    value = input_list[-1]
+    ##take the last value of the list
+    input_list[:] = input_list[:-1]
+    ##take a slice of the entire list and
+    ##replace with list minus last index
 
-    return None
+    return value
 
 
 def custom_index(input_list, value):
@@ -134,6 +166,10 @@ def custom_index(input_list, value):
         1
 
     """
+    length = custom_len(input_list)
+    for i in range(length):
+        if input_list[i] == value:
+            return i
 
     return 0
 
@@ -141,7 +177,8 @@ def custom_index(input_list, value):
 def custom_count(input_list, value):
     """Return the number of times value appears in the list.
 
-    Like input_list.count(value), custom_count(input_list, value) should
+    Like input_list.count(value), cus
+    tom_count(input_list, value) should
     return the number of times the specified value appears in the list.
 
     For example:
@@ -151,7 +188,13 @@ def custom_count(input_list, value):
 
     """
 
-    return 0
+    total = 0
+    
+    for ele in input_list:
+        if ele == value:
+            total += 1
+
+    return total
 
 
 def custom_reverse(input_list):
@@ -169,6 +212,7 @@ def custom_reverse(input_list):
         True
 
     """
+    input_list[:] = input_list[::-1]
 
     pass
 
@@ -190,7 +234,12 @@ def custom_contains(input_list, value):
 
     """
 
-    return None
+    for ele in input_list:
+        if ele == value:
+            return True
+
+
+    return False
 
 
 def custom_equality(some_list, another_list):
@@ -209,7 +258,13 @@ def custom_equality(some_list, another_list):
 
     """
 
-    return None
+    length = custom_len(some_list)
+
+    for i in range(length):
+        if some_list[i] != another_list[i]:
+            return False
+
+    return True
 
 
 # This is the part were we actually run the doctests.
@@ -220,3 +275,4 @@ if __name__ == '__main__':
     result = doctest.testmod()
     if result.failed == 0:
         print('ALL TESTS PASSED')
+
